@@ -7,6 +7,8 @@ class EventsController < ApplicationController
   end
 
   def show
+    # @event = Event.find(session[:user_id])
+
   end
 
   def new
@@ -15,8 +17,7 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.create(event_params)
-    @event.user = current_user
-    # puts @event.user
+    # @event = current_user.event.create(event_params)
     if @event.save
       flash[:notice] = "Event Suceesfully created"
       redirect_to events_path
@@ -42,6 +43,10 @@ class EventsController < ApplicationController
     redirect_to events_path
   end
 
+  def profile
+    @events = Event.all
+  end
+
   private
 
   def create_event
@@ -52,4 +57,3 @@ class EventsController < ApplicationController
     params.require(:event).permit(:name, :description, :event_date)
   end
 end
-

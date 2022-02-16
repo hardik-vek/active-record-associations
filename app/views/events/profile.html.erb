@@ -1,0 +1,41 @@
+<center>
+<h1> My Profile </h1>
+
+<p>Username: <%= current_user.username %></p>
+<p>Email: <%= current_user.email %></p>
+
+    <h2 class="center">Event Created by me</h2>
+    <div>
+        <table> 
+            <th>Event Name</th>
+            <th colspan=3>Actions</th>
+            <% @events.each do |event| %>
+            <% if event.user_id == session[:user_id] %>
+            <tr>
+                <td><%= event.name %></td>
+                <td><%= button_to "Show", event_path(event), method: :get %></td>
+                <td><%= button_to "Edit", edit_event_path(event), method: :get %></td>
+                <td><%= button_to "Delete", event_path(event), method: :delete %></td>
+            </tr>
+            <% end %>
+            <% end %>
+        </table>
+    </div>
+    <p>............................................................................</p>
+
+    <h2 class="center">Other events</h2>
+    <div>
+        <table> 
+            <th>Event Name</th>
+            <th>Actions</th>
+            <% @events.each do |event| %>
+            <% if event.user_id != session[:user_id] %>
+            <tr>
+                <td><%= event.name %></td>
+                <td><%= button_to "Show", event_path(event), method: :get %></td>
+            </tr>
+            <% end %>
+            <% end %>
+        </table>
+    </div>
+</center>

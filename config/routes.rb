@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'sessions/new'
   get 'sessions/create'
   get 'users/new'
+  get 'events/profile'
   resources :events
   get 'signup', to: 'users#new'
   resources :users, except: [:new]

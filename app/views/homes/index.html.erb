@@ -11,18 +11,22 @@
     <%= link_to "Login", login_path, method: :get %>
 </div>
 </center>
+
 <center>
-<h2>Event List</h2>
-<table> 
-<th>Event name</th>
-<th>Event Description</th>
-<th>Event Date</th>
-<% @events.each do |event| %>
-<tr>
-<td><%= event.name %></td>
-<td><%= event.description %></td>
-<td><%= event.event_date %></td>
-</tr>
-<% end %>
-</table>
+  <h2>Event List</h2>
+  <table> 
+    <th>Event name</th>
+    <th>Event Description</th>
+    <th>Event Date</th>
+    <th>Created By</th>
+    <% @events.each do |event| %>
+    <tr>
+      <td><%= event.name %></td>
+      <td><%= event.description %></td>
+      <td><%= event.event_date %></td>
+      <td><%= event.user.username if event.user %></td>
+    </tr>
+    <% end %>
+  </table>
 </center>
+
