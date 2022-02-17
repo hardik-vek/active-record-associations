@@ -1,0 +1,16 @@
+  
+  <h2>Enrolled Events</h2>
+  <table>
+  <th>Event Name</th>
+  <th>Event Description</th>
+  <th>Event Date</th>
+  <% @enrollment.each do |enrollment| %>
+  <% # if event.id == @enrollment.event_id %>
+  <tr>
+  <td><%= enrolllment.event.name %></td>
+  <td><%= enrolllment.event.description %></td>
+  <td><%= enrolllment.event.event_date %></td>
+  </tr>
+  </table>
+  <% end %>
+  <% # <% end %>

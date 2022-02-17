@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_16_120541) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_17_114823) do
   create_table "addresses", force: :cascade do |t|
     t.string "address"
     t.datetime "created_at", null: false
@@ -20,6 +20,21 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_16_120541) do
     t.index ["user_type", "user_id"], name: "index_addresses_on_user"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "category_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.integer "event_id", null: false
+    t.index ["event_id"], name: "index_enrollments_on_event_id"
+    t.index ["user_id"], name: "index_enrollments_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -27,6 +42,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_16_120541) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
+    t.integer "category_id", null: false
+    t.index ["category_id"], name: "index_events_on_category_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -38,5 +55,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_16_120541) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "enrollments", "events"
+  add_foreign_key "enrollments", "users"
+  add_foreign_key "events", "categories"
   add_foreign_key "events", "users"
 end

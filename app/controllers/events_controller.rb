@@ -47,6 +47,12 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+  def enrollment
+    @events = Event.all
+    @enrollment = Enrollment.new(event_id: params[:event_id], user_id: params[:user_id])
+    @enrollment.save
+  end
+
   private
 
   def create_event
@@ -54,6 +60,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :description, :event_date)
+    params.require(:event).permit(:name, :description, :event_date, :user_id, :category_id)
   end
 end

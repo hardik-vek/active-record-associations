@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       flash[:notice]="logged in successfully"
       redirect_to events_path
     else
-      flash.now[:alert]="there is something wronged with login detail"
+      flash.now[:error]="there is something wronged with login detail"
       render 'new'
     end
   end

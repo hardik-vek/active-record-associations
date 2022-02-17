@@ -1,6 +1,6 @@
 <h1 class="center">Event Listing</h1>
 <center>
-<%= link_to "Profile Page", events_profile_path, method: :get%>
+<%= link_to "Profile Page", events_profile_path, method: :post%>
 <p>............................................................................</p>
 </center>
 
@@ -10,13 +10,17 @@
       <th>Name</th>
       <th>Description</th>
       <th>Event_date</th>
+      <th>Category</th>
+      <th>Username</th>
       <th>Enrollment</th>
       <% @events.each do |event| %>
       <tr>
         <td><%= event.name %></td>
         <td><%= event.description %></td>
         <td><%= event.event_date %></td>
-        <td><%= button_to "Enrollment",events_profile_path,method: :get %></td>
+        <td><%= event.category.category_name %></td>
+        <td><%= event.user.username %></td>
+        <td><%= button_to "Enrollment",events_enrollment_path(event, user_id: current_user.id),method: :post %></td>
       </tr>
       <% end %>
     </table>

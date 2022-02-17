@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
   root 'homes#index'
+  get 'homes/index'
+  post 'events/enrollment'
   get 'sessions/new'
   get 'sessions/create'
   get 'users/new'
   get 'events/profile'
-  resources :events
+  # post 'events/enrollment' to: 'enrollments#index'
+  resources :events 
   get 'signup', to: 'users#new'
   resources :users, except: [:new]
   get 'login', to: 'sessions#new'
