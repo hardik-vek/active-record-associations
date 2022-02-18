@@ -19,5 +19,30 @@
             </tr>
         </table>
     </div>
+    <p>-----------------------</p>
 </center>
 
+
+<center>
+    <div>
+        <table> 
+            <th>Event Comment</th>
+            <% @event.comments.each do |comment| %>
+            <tr>
+                <td><%= comment.body %></td>
+            </tr>
+            <% end %>
+        </table>
+    </div>
+    <p>-----------------------</p>
+</center>
+
+<center>
+  <div><strong>Add comments: </strong>
+  <%= form_with(url: events_add_comments_path, method: "get") do |form| %>
+    <%= form.text_field :body %>
+    <%= form.hidden_field :event_id, value: @event.id %>
+    <%= form.submit("add comment") %>
+  <% end %>
+  </div>
+</center>

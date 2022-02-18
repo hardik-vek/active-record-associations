@@ -9,4 +9,6 @@ class User < ApplicationRecord
     has_many :enrollments
     has_many :enroll_events, through: :enrollments, source: :event
     has_one :address, as: :addressable
+    # has_many :comments, as: :commentable
+
 end

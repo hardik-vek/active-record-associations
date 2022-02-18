@@ -7,5 +7,6 @@ class Event < ApplicationRecord
     belongs_to :category
     has_many :enrollments
     has_many :enroll_events, through: :enrollments, source: :user
+    has_many :comments, as: :commentable
 
 end

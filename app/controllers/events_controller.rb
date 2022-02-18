@@ -7,7 +7,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    # @event = Event.find(session[:user_id])
 
   end
 
@@ -17,7 +16,6 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.create(event_params)
-    # @event = current_user.event.create(event_params)
     if @event.save
       flash[:notice] = "Event Suceesfully created"
       redirect_to events_path
@@ -47,6 +45,11 @@ class EventsController < ApplicationController
     @events = Event.all
   end
 
+  def add_comments
+    Event.find(params[:event_id]).comments.create("body"=>params[:body])
+    redirect_to event_path(id:params[:event_id])
+  end
+
   def enrollment
     @events = Event.all
     @enrollment = Enrollment.new(event_id: params[:event_id], user_id: params[:user_id])
@@ -62,4 +65,5 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :description, :event_date, :user_id, :category_id)
   end
+
 end

@@ -21,21 +21,3 @@
             <% end %>
         </table>
     </div>
-    <p>............................................................................</p>
-
-    <h2 class="center">Other events</h2>
-    <div>
-        <table> 
-            <th>Event Name</th>
-            <th>Actions</th>
-            <% @events.each do |event| %>
-            <% if event.user_id != session[:user_id] %>
-            <tr>
-                <td><%= event.name %></td>
-                <td><%= button_to "Show", event_path(event), method: :get %></td>
-            </tr>
-            <% end %>
-            <% end %>
-        </table>
-    </div>
-    </div>
