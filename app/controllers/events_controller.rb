@@ -7,7 +7,6 @@ class EventsController < ApplicationController
   end
 
   def show
-
   end
 
   def new
@@ -42,18 +41,14 @@ class EventsController < ApplicationController
   end
 
   def profile
+    @user = current_user
     @events = Event.all
+    @enroll_events = @user.enrollments.all
   end
 
   def add_comments
-    Event.find(params[:event_id]).comments.create("body"=>params[:body])
-    redirect_to event_path(id:params[:event_id])
-  end
-
-  def enrollment
-    @events = Event.all
-    @enrollment = Enrollment.new(event_id: params[:event_id], user_id: params[:user_id])
-    @enrollment.save
+    Event.find(params[:event_id]).comments.create("body" => params[:body])
+    redirect_to event_path(id: params[:event_id])
   end
 
   private
@@ -65,5 +60,4 @@ class EventsController < ApplicationController
   def event_params
     params.require(:event).permit(:name, :description, :event_date, :user_id, :category_id)
   end
-
 end

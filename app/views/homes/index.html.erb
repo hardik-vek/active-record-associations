@@ -16,11 +16,12 @@
 <center>
 
 <div>
-<%= form_tag homes_index_path, method: :get do %>
-<%= text_field_tag :search, params[:search], placeholder: "search by Category" %>
-<%= submit_tag 'search' %>
-<% end %>
+  <%= form_tag homes_index_path, method: :get do %>
+  <%= text_field_tag :search, params[:search], placeholder: "search by Category" %>
+  <%= submit_tag 'search' %>
+  <% end %>
 </div>
+
 </center>
 
 <center>
@@ -42,4 +43,3 @@
     <% end %>
   </table>
 </center>
-
