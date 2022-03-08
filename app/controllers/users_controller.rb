@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class UsersController < ApplicationController
   before_action :create_user, only: [:show, :edit, :update, :destroy]
 
@@ -15,7 +16,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice]="successfully signed up"
+      flash[:notice] = "successfully signed up"
       redirect_to login_path
     else
       render :new, status: :unprocessable_entity
@@ -37,13 +38,19 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to users_path
   end
+
+  def register_event
+    @user = User.find_by(id: session[:user_id])
+    @enrollment = @user.enrollments.create()
+  end
+
   private
-  
+
   def create_user
     @user = User.find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:username,:email,:password)
+    params.require(:user).permit(:username, :email, :password)
   end
 end
